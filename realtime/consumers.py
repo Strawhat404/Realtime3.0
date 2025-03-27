@@ -1,3 +1,4 @@
+# realtime/consumers.py
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 import json
@@ -22,7 +23,7 @@ class BeaconConsumer(AsyncWebsocketConsumer):
                     await self.send(text_data=json.dumps({
                         'area': area.name,
                         'content': promo.content
-                    })))
+                    }))
 
     @database_sync_to_async
     def get_area(self, major):
