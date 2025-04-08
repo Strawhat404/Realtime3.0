@@ -8,6 +8,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from accounts.views import TestAuthView
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Pirate Realtime API",
@@ -26,4 +28,5 @@ urlpatterns = [
     path('api/promotions/', PromotionListCreate.as_view(), name='promotion-list-create'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/test/', TestAuthView.as_view(), name='test_auth'),
 ]
