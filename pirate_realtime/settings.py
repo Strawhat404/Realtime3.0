@@ -23,10 +23,28 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'drf_yasg',
     'channels',
     'realtime',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),    # Short-lived access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),       # Longer-lived refresh token
+    'ROTATE_REFRESH_TOKENS': True,                     # New refresh token on refresh
+    'BLACKLIST_AFTER_ROTATION': True,                  # Blacklist old refresh tokens
+    'AUTH_HEADER_TYPES': ('Bearer',),                  # Standard header type
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
