@@ -22,13 +22,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
     'rest_framework_simplejwt',
+    'dj_rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'accounts',
     'drf_yasg',
     'channels',
     'realtime',
 ]
+
+SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -47,6 +55,16 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),                  # Standard header type
 }
 
+AUTHENTICATION_BACKENDS = [
+      'django.contrib.auth.backends.ModelBackend',
+      'allauth.account.auth_backends.AuthenticationBackend',
+  ]
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  
+ACCOUNT_AUTHENTICATION_METHOD = 'email'   
+ACCOUNT_USERNAME_REQUIRED = False
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -57,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+WHITENOISE_USE_FINDERS = True
 
 ROOT_URLCONF = 'pirate_realtime.urls'
 WSGI_APPLICATION = 'pirate_realtime.wsgi.application'
