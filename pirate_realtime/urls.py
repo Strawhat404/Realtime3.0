@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
@@ -29,4 +29,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/test/', TestAuthView.as_view(), name='test_auth'),
+    path('api/auth/', include('dj_rest_auth.urls')),  # Login, logout, password reset
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),  # Signup
+    path('accounts/', include('allauth.urls')),  # Social auth, email verification
 ]
